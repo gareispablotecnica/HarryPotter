@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+   background-image: url("https://images7.alphacoders.com/122/1221680.jpg");
+   background-size: cover;
+}
+
+article{
+    /* Posicionamiento automatico para desplazarlo */
+    position: relative;
+    width: 250px;
+    /*  Transicion al comienzo lento, 
+    luego rápido y finalmente termina lento */
+    transition: all .3s ease;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 65px;
+}
+
+/* :first-child -->pseudo-clase que selecciona al primer elemento */
+article img:first-child{
+    box-shadow: 5px 25px 30px -10px #272829;
+    border-radius: 15px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* :last-child -->pseudo-clase que selecciona al  ultimo elemento */
+article img:last-child{
+    position: absolute;
+    width: 200px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* transform:translateY(25%); ---> reposiciona un elemento verticalment*/
+    transform:translateY(25%);
+    transition: .3s ease;
+    opacity: 0;
+    
+}
+
+article:hover{
+    transform: 
+    /* perspectiva al elemento 3D 
+    determina la distancia entre el plano z=0 y el usuario*/
+    perspective(250px)
+    /* rotateX--> nos permite transformar un elemento al rotarlo sobre sus distintos ejes */
+    rotateX(10deg)
+    translateY(-5%)
+    translateZ(0);
+}
+
+article::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    /*permite crear fondos degradados*/
+    background-image:linear-gradient(
+        /*Borde Inferior*/
+        to bottom,
+        transparent 10%,
+        rgba(0,0,0,0.5) 50%
+        rgba(0,0,0)95%
+    );
+    opacity: 0;
+    transition: all .3s ease;
+    /*Desenfocar el fondo*/
+    backdrop-filter: blur(1px);
+}
+
+article:hover::before{
+    opacity: 1;
+}
+
+article:hover img:last-child{
+    opacity: 1;
+}
